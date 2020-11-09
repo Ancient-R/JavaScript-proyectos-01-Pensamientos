@@ -10,22 +10,27 @@ const agregarTweet = (e) => {
     e.preventDefault()
     
     const tweet = document.getElementById('tweet').value
-    const fragment = document.createDocumentFragment()
-    const lista = document.createElement('li')
-    lista.textContent = tweet
+    if( tweet.trim() !== '' ){
+        const fragment = document.createDocumentFragment()
+        const lista = document.createElement('li')
+        lista.textContent = tweet
 
-    const botonBorrar = document.createElement('a')
-    botonBorrar.classList.add('borrar-tweet')
-    botonBorrar.textContent = 'X'
-    lista.appendChild(botonBorrar)
+        const botonBorrar = document.createElement('a')
+        botonBorrar.classList.add('borrar-tweet')
+        botonBorrar.textContent = 'X'
+        lista.appendChild(botonBorrar)
+    
+        fragment.appendChild(lista)
+        listaTweets.appendChild(fragment)
+    
+        form.reset()
+    
+        //Añadir el tweet a LocalStorage
+        agregarTweetLocalStorage(tweet)
+    }else{
+        alert('Ingresa un pensamiento')
+    }
 
-    fragment.appendChild(lista)
-    listaTweets.appendChild(fragment)
-
-    form.reset()
-
-    //Añadir el tweet a LocalStorage
-    agregarTweetLocalStorage(tweet)
 }
 
     //Borrar el tweet de la lista
